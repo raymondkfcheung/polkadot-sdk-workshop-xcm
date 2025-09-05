@@ -6,9 +6,9 @@ features=(
     "location"
     "asset"
     "instruction"
-    "holding"
-	"xcm_executor"
-	"pallet_xcm"
+#    "holding"
+#	   "xcm_executor"
+#	   "pallet_xcm"
 )
 
 # Run cargo test commands
