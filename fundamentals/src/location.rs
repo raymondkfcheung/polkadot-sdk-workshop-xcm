@@ -62,20 +62,20 @@ pub mod relative_to_polkadot_para_1000 {
 
 	parameter_types! {
 		// The Polkadot parachain with id 1000.
-		pub PolkadotPara1000: Location = todo!();
+		pub PolkadotPara1000: Location = Here.into();
 		// The Polkadot parachain with id 2004.
-		pub PolkadotPara2004: Location = todo!();
+		pub PolkadotPara2004: Location = (Parent, Parachain(2004)).into();
 		// The Polkadot relay chain.
-		pub PolkadotRelay: Location = todo!();
+		pub PolkadotRelay: Location = Parent.into();
 		// A 32 byte account on para 1000.
-		pub AliceBytes: [u8; 32] = todo!();
-		pub PolkadotPara1000Alice: Location = todo!();
+		pub AliceBytes: [u8; 32] = [42; 32];
+		pub PolkadotPara1000Alice: Location = Location::new(0, [AliceBytes::get().into()]);
 		// The location of the `Balances` pallet on the relay chain.
-		pub PolkadotPara1000AssetsPallet: Location = todo!();
+		pub PolkadotPara1000AssetsPallet: Location = Location::new(0, [PalletInstance(50)]);
 		// The asset with index `1984` of the Assets pallet on the Polkadot parachain with id 1000.
-		pub PolkadotPara1000Asset1984: Location = todo!();
+		pub PolkadotPara1000Asset1984: Location = Location::new(0, [PalletInstance(50), GeneralIndex(1984)]);
 		// The Kusama parachain with id 1000.
-		pub KusamaPara1000: Location = todo!();
+		pub KusamaPara1000: Location = Location::new(2, [GlobalConsensus(Kusama), Parachain(1000)]);
 	}
 }
 
