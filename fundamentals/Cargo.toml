@@ -36,6 +36,3 @@ polkadot-parachain-primitives = { git = "https://github.com/paritytech/polkadot-
 location = []
 asset = []
 instruction = []
-holding = []
-xcm_executor = ["holding"]
-pallet_xcm = ["xcm_executor"]
