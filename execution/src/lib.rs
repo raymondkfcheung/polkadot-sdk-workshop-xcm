@@ -43,7 +43,8 @@ mod tests {
 		let assets_to_withdraw: Assets = vec![
 			(Here, transfer_amount).into(),  // The assets we want to transfer.
 			(Parent, 10 * WND_CENTS).into(), // We use for remote fees.
-		].into();
+		]
+		.into();
 
 		// Parameters of the `PayFees` instruction.
 		// These assets will be taken from the holding register, local execution
@@ -68,8 +69,9 @@ mod tests {
 		// trust the system.
 		let transfer_assets = vec![AssetTransferFilter::Teleport(Wild(AllCounted(1)))];
 		// The XCM meant to execute on the destination, so on the asset hub.
-		let remote_xcm =
-			Xcm::<()>::builder_unsafe().deposit_asset(AllCounted(1), receiver.clone()).build();
+		let remote_xcm = Xcm::<()>::builder_unsafe()
+			.deposit_asset(AllCounted(1), receiver.clone())
+			.build();
 
 		// We assemble everything into the XCM we'll execute locally.
 		let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
