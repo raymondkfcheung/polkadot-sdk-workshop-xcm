@@ -1,11 +1,14 @@
 #![allow(dead_code)]
 
+use super::{CheckingAccount, HereLocation, LocationToAccountId};
 use crate::{AccountId, Balance, Balances, ForeignAssets};
-use super::{LocationToAccountId, HereLocation, CheckingAccount};
 
 use frame_support::traits::EverythingBut;
 use xcm::prelude::*;
-use xcm_builder::{IsConcrete, NoChecking, FungibleAdapter, FungiblesAdapter, StartsWith, MatchedConvertedConcreteId};
+use xcm_builder::{
+	FungibleAdapter, FungiblesAdapter, IsConcrete, MatchedConvertedConcreteId, NoChecking,
+	StartsWith,
+};
 use xcm_executor::traits::JustTry;
 
 /// Means for transacting assets on this chain.
@@ -44,4 +47,4 @@ pub type ForeignFungiblesTransactor = FungiblesAdapter<
 >;
 
 // TODO: Need to plug in the adapters here.
-pub type AssetTransactor = ();
+pub type AssetTransactor = (LocalFungibleTransactor, ForeignFungiblesTransactor);

@@ -16,20 +16,18 @@ fn can_handle_native_asset() {
 
 	// The amount we want to withdraw of the native asset.
 	let withdraw_amount = 1 * PARA_UNITS;
-	let assets_to_withdraw: Assets = vec![
-	    (Here, withdraw_amount).into()
-	].into();
+	let assets_to_withdraw: Assets = vec![(Here, withdraw_amount).into()].into();
 
 	let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
-	    .withdraw_asset(assets_to_withdraw)
-	    .build();
+		.withdraw_asset(assets_to_withdraw)
+		.build();
 
 	CustomPara::execute_with(|| {
-	    assert_ok!(<CustomPara as CustomParaPallet>::PolkadotXcm::execute(
-	        <CustomPara as Chain>::RuntimeOrigin::signed(sender.clone()),
-	        Box::new(VersionedXcm::from(xcm)),
-            Weight::MAX,
-	    ));
+		assert_ok!(<CustomPara as CustomParaPallet>::PolkadotXcm::execute(
+			<CustomPara as Chain>::RuntimeOrigin::signed(sender.clone()),
+			Box::new(VersionedXcm::from(xcm)),
+			Weight::MAX,
+		));
 	});
 }
 
@@ -42,19 +40,17 @@ fn can_handle_relay_asset() {
 
 	// The amount we want to withdraw of the native asset.
 	let withdraw_amount = 1 * WND_UNITS;
-	let assets_to_withdraw: Assets = vec![
-	    (Parent, withdraw_amount).into()
-	].into();
+	let assets_to_withdraw: Assets = vec![(Parent, withdraw_amount).into()].into();
 
 	let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
-	    .withdraw_asset(assets_to_withdraw)
-	    .build();
+		.withdraw_asset(assets_to_withdraw)
+		.build();
 
 	CustomPara::execute_with(|| {
-	    assert_ok!(<CustomPara as CustomParaPallet>::PolkadotXcm::execute(
-	        <CustomPara as Chain>::RuntimeOrigin::signed(sender.clone()),
-	        Box::new(VersionedXcm::from(xcm)),
-            Weight::MAX,
-	    ));
+		assert_ok!(<CustomPara as CustomParaPallet>::PolkadotXcm::execute(
+			<CustomPara as Chain>::RuntimeOrigin::signed(sender.clone()),
+			Box::new(VersionedXcm::from(xcm)),
+			Weight::MAX,
+		));
 	});
 }

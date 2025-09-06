@@ -39,9 +39,7 @@ pub fn setup(initial_wnd_balance: u128, initial_para_balance: u128) -> (AccountI
 	// We mint the initial `PARA` balance passed in to the sender.
 	CustomPara::execute_with(|| {
 		type Balances = <CustomPara as CustomParaPallet>::Balances;
-		assert_ok!(
-			<Balances as fungible::Mutate<_>>::mint_into(&sender, initial_para_balance,)
-		);
+		assert_ok!(<Balances as fungible::Mutate<_>>::mint_into(&sender, initial_para_balance,));
 	});
 	// We mint the initial `WND` balance passed in to the sender.
 	CustomPara::mint_foreign_asset(

@@ -4,9 +4,8 @@ mod barrier;
 mod reserves_and_teleports;
 
 use crate::{
-	AccountId, AllPalletsWithSystem, Balances, ParachainInfo,
-	ParachainSystem, PolkadotXcm, Runtime, RuntimeCall, RuntimeEvent, RuntimeOrigin, WeightToFee,
-	XcmpQueue,
+	AccountId, AllPalletsWithSystem, Balances, ParachainInfo, ParachainSystem, PolkadotXcm,
+	Runtime, RuntimeCall, RuntimeEvent, RuntimeOrigin, WeightToFee, XcmpQueue,
 };
 use frame_support::{
 	parameter_types,
@@ -20,11 +19,10 @@ use polkadot_runtime_common::impls::ToAuthor;
 use sp_runtime::traits::AccountIdConversion;
 use xcm::latest::prelude::*;
 use xcm_builder::{
-	AccountId32Aliases, DescribeAllTerminal, DescribeFamily,
-	EnsureXcmOrigin, FixedWeightBounds, FrameTransactionalProcessor, HashedDescription,
-	RelayChainAsNative, SiblingParachainAsNative, SignedAccountId32AsNative,
-	SignedToAccountId32, SovereignSignedViaLocation,
-	UsingComponents, WithUniqueTopic,
+	AccountId32Aliases, DescribeAllTerminal, DescribeFamily, EnsureXcmOrigin, FixedWeightBounds,
+	FrameTransactionalProcessor, HashedDescription, RelayChainAsNative, SiblingParachainAsNative,
+	SignedAccountId32AsNative, SignedToAccountId32, SovereignSignedViaLocation, UsingComponents,
+	WithUniqueTopic,
 };
 use xcm_executor::XcmExecutor;
 
