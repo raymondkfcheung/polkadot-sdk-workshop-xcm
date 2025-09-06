@@ -363,7 +363,15 @@ mod tests {
 			.build();
 
 		let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
-			// TODO: Add instructions.
+			.withdraw_asset(assets_to_withdraw)
+			.pay_fees(fees_asset)
+			.initiate_transfer(
+				destination,
+				remote_fees,
+				preserve_origin,
+				assets_to_transfer,
+				remote_xcm,
+			)
 			.build();
 
 		// We get the initial WND amount so we can compare it later.
