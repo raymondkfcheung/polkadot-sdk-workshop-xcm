@@ -404,9 +404,40 @@ mod tests {
 		let initial_para_balance = 100 * PARA_UNITS;
 		let (sender, _) = setup(initial_wnd_balance, initial_para_balance);
 		let transfer_amount = 23 * PARA_UNITS;
+
+		let assets_to_withdraw: Assets = (Here, transfer_amount).into();
+
 		let fees_amount = 10 * PARA_CENTS;
+		let fees_asset: Asset = (Here, fees_amount).into();
+
+		let destination: Location = (Parent, Parachain(1000)).into();
+		let remote_fees =
+			Some(AssetTransferFilter::Teleport(Definite((Here, 20 * PARA_CENTS).into())));
+		let preserve_origin = false;
+		let assets_to_transfer = vec![AssetTransferFilter::Teleport(Wild(AllCounted(1)))];
+		let inner_xcm =
+			Xcm::<()>::builder_unsafe().deposit_asset(AllCounted(1), sender.clone()).build();
+		let remote_xcm = Xcm::<()>::builder_unsafe()
+			.exchange_asset(Wild(AllCounted(1)), (Parent, 10 * WND_UNITS), true)
+			.initiate_transfer(
+				Location::new(1, [Parachain(2000)]),
+				AssetTransferFilter::ReserveDeposit(Definite((Parent, 50 * WND_CENTS).into())),
+				preserve_origin,
+				vec![AssetTransferFilter::ReserveDeposit(Wild(AllCounted(1)))],
+				inner_xcm,
+			)
+			.build();
+
 		let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
-			// TODO: Add instructions.
+			.withdraw_asset(assets_to_withdraw)
+			.pay_fees(fees_asset)
+			.initiate_transfer(
+				destination,
+				remote_fees,
+				preserve_origin,
+				assets_to_transfer,
+				remote_xcm,
+			)
 			.build();
 
 		CustomPara::execute_with(|| {
