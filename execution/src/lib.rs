@@ -75,7 +75,15 @@ mod tests {
 
 		// We assemble everything into the XCM we'll execute locally.
 		let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
-			// TODO: Add instructions.
+			.withdraw_asset(assets_to_withdraw)
+			.pay_fees(fees_assets)
+			.initiate_transfer(
+				destination,
+				remote_fees,
+				preserve_origin,
+				transfer_assets,
+				remote_xcm,
+			)
 			.build();
 
 		// This lets us execute calls on `CustomPara`.
@@ -276,7 +284,15 @@ mod tests {
 
 		// We assemble the XCM with all the previous values.
 		let xcm = Xcm::<<CustomPara as Chain>::RuntimeCall>::builder_unsafe()
-			// TODO: Add instructions.
+			.withdraw_asset(assets_to_withdraw)
+			.pay_fees(fees_assets)
+			.initiate_transfer(
+				destination,
+				remote_fees,
+				preserve_origin,
+				transfer_assets,
+				remote_xcm,
+			)
 			.build();
 
 		// We execute the XCM and assert that the `transfer_amount` is taken
